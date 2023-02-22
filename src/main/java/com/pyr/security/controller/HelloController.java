@@ -23,4 +23,23 @@ public class HelloController {
     public String role() {
         return "admin Auth!";
     }
+
+
+    /**
+     * 当前登录的用户，有ADMIN或者MANAGER的角色
+     */
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
+    @RequestMapping("/roleAuth2")
+    public String role2() {
+        return "admin Auth  222!";
+    }
+
+    /**
+     * 传过来的id小于10 且 传过来的userName和数据库查出来的username相等
+     */
+    @PreAuthorize("#id< 10 and principal.username.equals(#username)")
+    @RequestMapping("/roleAuth3")
+    public String role3(Integer id, String username) {
+        return "admin Auth  33!";
+    }
 }
